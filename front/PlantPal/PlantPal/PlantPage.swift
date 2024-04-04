@@ -13,17 +13,20 @@ struct PlantPage: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Section {
-                    Text("PlantPal")
-                }
-                    .font(.system(size: titleSize))
-                Section {
-                    Text("Plant1")
-                    Text("Plant2")
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
+                VStack {
+                    Section {
+                        Text("PlantPal")
+                    }
+                        .font(.system(size: titleSize))
+                    Section {
+                        Text("Plant1")
+                        Text("Plant2")
+                    }
                 }
             }
-            
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }
