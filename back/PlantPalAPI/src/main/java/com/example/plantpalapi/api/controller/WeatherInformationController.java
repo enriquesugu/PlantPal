@@ -1,4 +1,4 @@
-package com.example.plantpalapi.api.controller
+package com.example.plantpalapi.api.controller;
 
 import com.example.plantpalapi.service.WeatherInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
