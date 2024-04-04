@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
                 VStack {
                     Text("Main screen")
                     
