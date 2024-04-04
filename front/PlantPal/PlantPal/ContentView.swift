@@ -9,17 +9,23 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    var titlePage = TitlePage(titleSize: CGFloat(48))
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 36)!]
+    }
     
     var body: some View {
-        let borderSize = CGFloat(-1)
-        VStack(spacing: borderSize) {
-            titlePage.DisplayTitlePage()
+        NavigationView {
+            VStack {
+                Text("Main screen")
+                
+                NavigationLink(destination: PlantPage(titleSize: CGFloat(48))) {
+                    Text("My Plants")
+                        .padding()
+                }
+            }
+            .navigationBarTitle (Text("PlantPal"), displayMode: .inline)
         }
+        .padding()
     }
 
-}
-
-#Preview {
-    ContentView()
 }
