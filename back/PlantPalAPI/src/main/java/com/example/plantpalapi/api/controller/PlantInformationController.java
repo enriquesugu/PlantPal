@@ -1,19 +1,18 @@
 package com.example.plantpalapi.api.controller;
 
-import com.example.plantpalapi.api.model.PlantInformation;
-import com.example.plantpalapi.service.PlantService;
+import com.example.plantpalapi.service.PlantInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PlantController {
+public class PlantInformationController {
 
-    private PlantService plantService;
+    private PlantInformationService plantService;
 
     @Autowired
-    public PlantController(PlantService plantService) {
+    public PlantInformationController(PlantInformationService plantService) {
         this.plantService = plantService;
     }
 

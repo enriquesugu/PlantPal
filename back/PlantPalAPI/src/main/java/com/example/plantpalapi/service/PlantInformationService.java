@@ -3,9 +3,9 @@ package com.example.plantpalapi.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlantService {
+public class PlantInformationService {
 
     public String getPlantInformation(String type, String location) {
-        return "Hello" + type;
+        return "Chatgpt says some stuff about " + type;
     }
 }
