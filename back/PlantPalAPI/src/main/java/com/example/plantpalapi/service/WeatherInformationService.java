@@ -17,22 +17,15 @@ import io.github.cdimascio.dotenv.DotenvException;
 
 @Service
 public class WeatherInformationService {
-    public String getRequiredWater(String type, String location) {
-        return getLiveWeather(location);
+    public String getRequiredWater(double baseWater, double longitude, double latitude) {
+        return getLiveWeather(longitude, latitude);
     }
 
-    private String getLiveWeather(String location) {
-        System.out.println("Extracting weather data from Weatherstack...");
-
-        Dotenv dotenv = null;
-        dotenv = Dotenv.configure().load();
-
-        String apiKey = dotenv.get("WEATHERSTACK_KEY");
-        System.out.println(apiKey);
-        String query = "Melbourne";
+    private String getLiveWeather(double longitude, double latitude) {
+        System.out.println("Extracting weather data from open-meteo...");
 
         try {
-            String url = "http://api.weatherstack.com/current?access_key=" + apiKey + "&query=" + URLEncoder.encode(query, "UTF-8");
+            String url = "https://api.open-meteo.com/v1/forecast?latitude=" +latitude+ "&longitude=" + longitude + "&hourly=temperature_2m,rain&daily=rain_sum&timezone=Australia%2FSydney";
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("GET");
