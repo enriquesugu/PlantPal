@@ -18,6 +18,6 @@ public class WeatherInformationController {
 
     @GetMapping("requiredWater/")
     public String getWeatherInformation(@RequestParam double baseWater, @RequestParam double longitude, @RequestParam double latitude) {
-        return weatherInformationService.getRequiredWater(baseWater, longitude, latitude);
+        return weatherInformationService.getRequiredWater(baseWater, longitude, latitude).toString();
     }
 }

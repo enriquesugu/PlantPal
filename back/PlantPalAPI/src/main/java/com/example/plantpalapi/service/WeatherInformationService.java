@@ -4,28 +4,25 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpClient;
 import java.io.IOException;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import io.github.cdimascio.dotenv.DotenvException;
+import org.json.JSONObject;
 
 @Service
 public class WeatherInformationService {
-    public String getRequiredWater(double baseWater, double longitude, double latitude) {
-        return getLiveWeather(longitude, latitude);
+    public JSONObject getRequiredWater(double baseWater, double longitude, double latitude) {
+        return calculateAllRequirements(baseWater, longitude, latitude);
     }
 
-    private String getLiveWeather(double longitude, double latitude) {
+    private JSONObject calculateAllRequirements(double baseWater, double longitude, double latitude) {
         System.out.println("Extracting weather data from open-meteo...");
 
         try {
-            String url = "https://api.open-meteo.com/v1/forecast?latitude=" +latitude+ "&longitude=" + longitude + "&hourly=temperature_2m,rain&daily=rain_sum&timezone=Australia%2FSydney";
+            String url = "https://api.open-meteo.com/v1/forecast?latitude=" +
+                    latitude +
+                    "&longitude=" +
+                    longitude +
+                    "&current=temperature_2m,rain&daily=temperature_2m_max,rain_sum&timezone=Australia%2FSydney&past_days=1&forecast_days=2";
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("GET");
@@ -40,11 +37,41 @@ public class WeatherInformationService {
             in.close();
 
             System.out.println(response.toString());
-            return response.toString();
+
+            // Et calcs
+            JSONObject output = new JSONObject();
+            JSONObject jsonResponse = new JSONObject(response.toString());
+
+            output.put("currentTemperature", jsonResponse.getJSONObject("current").getDouble("temperature_2m"));
+
+            double yesterdaysTemp = jsonResponse.getJSONObject("daily").getJSONArray("temperature_2m_max").getDouble(0);
+            double todaysTemp = jsonResponse.getJSONObject("daily").getJSONArray("temperature_2m_max").getDouble(2);
+            double tomorrowsTemp = jsonResponse.getJSONObject("daily").getJSONArray("temperature_2m_max").getDouble(2);
+
+            double averageET = calculateAverageET(calculateET(1.2, yesterdaysTemp),
+                    calculateET(1.2, todaysTemp),
+                    calculateET(1.2, tomorrowsTemp));
+
+            double yesterdaysPrecip = jsonResponse.getJSONObject("daily").getJSONArray("rain_sum").getDouble(0);
+            double todaysPrecip = jsonResponse.getJSONObject("daily").getJSONArray("rain_sum").getDouble(1);
+            double tomorrowsPrecip = jsonResponse.getJSONObject("daily").getJSONArray("rain_sum").getDouble(2);
+            double totalPrecip = yesterdaysPrecip + todaysPrecip + tomorrowsPrecip;
+
+            output.put("waterRequirement", baseWater + averageET - totalPrecip);
+            
+            return output;
 
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private double calculateET(double evapConstant, double temperature) {
+        return evapConstant * temperature;
+    }
+
+    private double calculateAverageET(double yesterdaysET, double todaysET, double tomorrowsET) {
+        return (yesterdaysET + todaysET + tomorrowsET) / 3;
     }
 }
