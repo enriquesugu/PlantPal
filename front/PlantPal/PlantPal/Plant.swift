@@ -22,6 +22,7 @@ struct Plant: Hashable, View {
     let imageName: String
     
     @State private var requiredWater: RequiredWater?
+    @State private var plantInformation: PlantInformation?
     
     var body: some View {
       
@@ -99,7 +100,7 @@ struct Plant: Hashable, View {
                         Spacer()
                     }
                     
-                    Text("Hey there plant parent! With the recent sunny days and warm temperatures, your leafy friend could use a little extra love in the form of 5.1 liters of water per square meter. Let's keep those roots happy and hydrated! 🌿💦")
+                    Text(chatGPTHeadsUp)
                         .font(.subheadline)
                         .foregroundColor(Color.gray)
                 }
@@ -116,7 +117,7 @@ struct Plant: Hashable, View {
                         Spacer()
                     }
                     
-                    Text("When caring for your tomatoes in Melbourne, be sure to give them plenty of sunlight as they thrive in warm weather. Water your plants regularly, making sure not to overwater as they can be sensitive to too much moisture. Keep an eye out for pests like aphids and caterpillars, and remove them promptly to prevent damage to your plants. Happy gardening!")
+                    Text(gptTips)
                         .font(.subheadline)
                         .foregroundColor(Color.gray)
                 }
@@ -140,6 +141,7 @@ struct Plant: Hashable, View {
         .task {
             do {
                 requiredWater = try await getRequiredWater(baseWater: "5000", latitude: "-37.9023", longitude: "145.0173")
+                plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
             } catch WaterError.invalidURL {
                 print("invalidURL")
             } catch WaterError.invalidResponse {
@@ -175,13 +177,29 @@ struct Plant: Hashable, View {
         } catch {
             throw WaterError.invalidData
         }
-         
-//        let endpoint = "http://localhost:8080/requiredWater/?baseWater=\(baseWater)&latitude=\(latitude)&longitude=\(longitude)"
-//        guard let url = URL(string: endpoint) else {
-//            print("Invalid URL")
-//            return
-//        }
         
+    }
+    
+    // API call to get plant information
+    func getPlantInformation(type: String, location: String) async throws -> PlantInformation {
+        let endpoint = "http://localhost:8080/plantInformation/?type=\(type)&location=\(location)"
+        guard let url = URL(string: endpoint) else {
+            throw WaterError.invalidURL
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw WaterError.invalidResponse
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .useDefaultKeys
+            return try decoder.decode(PlantInformation.self, from: data)
+        } catch {
+            throw WaterError.invalidData
+        }
     }
 }
 
@@ -189,6 +207,10 @@ struct RequiredWater: Codable {
     let currentTemperature: Double
     let waterRequirementInLitres: Double
     let chatGPTHeadsUp: String
+}
+
+struct PlantInformation: Codable {
+    let gptTips: String
 }
 
 enum WaterError: Error {

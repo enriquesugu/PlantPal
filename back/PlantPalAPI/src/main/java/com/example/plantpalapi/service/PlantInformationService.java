@@ -14,12 +14,12 @@ import java.net.URL;
 @Service
 public class PlantInformationService {
 
-    public String getPlantInformation(String type, String location) {
+    public JSONObject getPlantInformation(String type, String location) {
         return getChatGPTTips(type, location);
     }
 
 
-    public String getChatGPTTips(String type, String location) {
+    public JSONObject getChatGPTTips(String type, String location) {
         String url = "https://api.openai.com/v1/chat/completions";
         String model = "gpt-3.5-turbo";
 
@@ -62,7 +62,9 @@ public class PlantInformationService {
             JSONObject jsonResponse = new JSONObject(response.toString());
             System.out.println(jsonResponse.toString());
 
-            return jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
+            output.put("gptTips", jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content"));
+
+            return output;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
