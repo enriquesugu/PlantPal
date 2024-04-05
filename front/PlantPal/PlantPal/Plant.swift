@@ -21,6 +21,7 @@ struct Plant: Hashable, View {
     
     let name: String
     let imageName: String
+    let squareMeters: Double?
     
     @State private var requiredWater: RequiredWater?
     @State private var plantInformation: PlantInformation?

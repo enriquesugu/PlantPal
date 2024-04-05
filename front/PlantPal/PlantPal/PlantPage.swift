@@ -20,7 +20,7 @@ struct PlantPage: View {
             } else {
                 VStack {
                     ForEach(Array(plants.enumerated()), id: \.offset) { index, plant in
-                        NavigationLink(destination: Plant(name: plant.self.name, imageName: plant.self.imageName)) {
+                        NavigationLink(destination: Plant(name: plant.self.name, imageName: plant.self.imageName,squareMeters: plant.self.squareMeters)) {
                             Text(plant.name)
                                 .foregroundColor(.black)
                                 .padding(20)
