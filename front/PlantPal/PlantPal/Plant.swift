@@ -34,7 +34,12 @@ struct Plant: Hashable, View {
                 Text("\(name)")
                     .bold()
                 //Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")
-                Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
+                
+                if (requiredWater == nil) {
+                    ProgressView()
+                } else {
+                    Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
+                }
                 
             }
             
