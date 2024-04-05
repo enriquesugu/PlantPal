@@ -27,9 +27,10 @@ struct Plant: Hashable, View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
             VStack {
-                Circle()
-                    .foregroundColor(.secondary)
-                    .frame(width: 120, height: 120)
+                Image("\(imageName)")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
                 Text("\(name)")
                     .bold()
                 //Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")

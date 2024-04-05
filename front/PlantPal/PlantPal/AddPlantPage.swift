@@ -10,9 +10,9 @@ import SwiftUI
 
 struct AddPlantPage: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var selectedPlant: String?
     @Binding var plants: [Plant]
-
+    @State private var selectedPlant: String?
+    
     var body: some View {
         VStack {
             Text("Select a Plant to Add:")
@@ -23,16 +23,28 @@ struct AddPlantPage: View {
                 self.selectedPlant = "Passionfruit"
                 self.addPlant()
             }) {
-                Text("Passionfruit")
-                    .padding()
+                HStack {
+                    Image("passionfruit")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                    Text("Passionfruit")
+                        .padding()
+                }
             }
             
             Button(action: {
                 self.selectedPlant = "Strawberry"
                 self.addPlant()
             }) {
-                Text("Strawberry")
-                    .padding()
+                HStack {
+                    Image("strawberry")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                    Text("Strawberry")
+                        .padding()
+                }
             }
             
             Spacer()
