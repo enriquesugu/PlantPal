@@ -11,33 +11,28 @@ import SwiftUI
 struct PlantPage: View {
 
     @Binding var plants: [Plant]
-    
+
     var body: some View {
-        
         ScrollView {
             if plants.isEmpty {
                 Text("You haven't got any plants yet")
                     .foregroundColor(.gray)
             } else {
                 VStack {
-                    ForEach(plants, id: \.self) { plant in
-                        NavigationLink(value: plant) {
+                    ForEach(Array(plants.enumerated()), id: \.offset) { index, plant in
+                        NavigationLink(destination: Plant(name: plant.self.name, imageName: plant.self.imageName)) {
                             Text(plant.name)
+                                .foregroundColor(.black)
+                                .padding(20)
+                                .background(
+                                    Capsule().fill(Color.green.opacity(0.1 * (Double(index) + 1)))
+                                )
                         }
-                        .foregroundColor(Color.black)
-                            .padding(20)
-                            .background(Capsule(style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color.green).opacity(0.2))
+                        .frame(maxWidth: .infinity)
                     }
-                
                 }
-                .navigationDestination(for: Plant.self) { value in
-                    Plant(name: value.name, imageName: value.imageName)
-                }
-                
             }
-            
         }
-        
     }
 }
 
