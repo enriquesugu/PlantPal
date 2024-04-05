@@ -22,13 +22,29 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 
-                Text("Welcome back, Henry!")
+                HStack {
+                    Text("Welcome back Henry!\nIt's cool today...")
+                        .foregroundColor(Color.black)
+                        .padding(20)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
+                    
+                    Image(systemName: "snowflake")
+                                .font(.system(size: 38))
+                                .foregroundColor(Color.white)
+                                .padding(20)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
+                }
+            
+                
+                Divider()
                 
                 Spacer()
                 
                 PlantPage(plants: plants)
                 
                 Spacer()
+                
+                Divider()
 
                 HStack {
                     NavigationLink(destination: PlantPage(plants: plants)) {
