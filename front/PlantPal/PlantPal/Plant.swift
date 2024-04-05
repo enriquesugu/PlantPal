@@ -32,7 +32,8 @@ struct Plant: Hashable, View {
                     .frame(width: 120, height: 120)
                 Text("\(name)")
                     .bold()
-                Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")
+                //Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")
+                Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
                 
             }
             
@@ -56,7 +57,7 @@ struct Plant: Hashable, View {
     
     // API call to get required water information
     func getRequiredWater(baseWater: String, latitude: String, longitude: String) async throws -> RequiredWater {
-        /*
+        
         let endpoint = "http://localhost:8080/requiredWater/?baseWater=\(baseWater)&latitude=\(latitude)&longitude=\(longitude)"
         print("yes")
         guard let url = URL(string: endpoint) else {
@@ -72,16 +73,17 @@ struct Plant: Hashable, View {
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .useDefaultKeys
+            print("didnt catch wooohboo")
             return try decoder.decode(RequiredWater.self, from: data)
         } catch {
             throw WaterError.invalidData
         }
-         */
-        let endpoint = "http://localhost:8080/requiredWater/?baseWater=\(baseWater)&latitude=\(latitude)&longitude=\(longitude)"
-        guard let url = URL(string: endpoint) else {
-            print("Invalid URL")
-            return
-        }
+         
+//        let endpoint = "http://localhost:8080/requiredWater/?baseWater=\(baseWater)&latitude=\(latitude)&longitude=\(longitude)"
+//        guard let url = URL(string: endpoint) else {
+//            print("Invalid URL")
+//            return
+//        }
         
     }
 }
