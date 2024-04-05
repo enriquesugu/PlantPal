@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F7269672BBFD3CB003B5574 /* AddPlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */; };
 		98A7707B2BBE50BB00F81FD7 /* PlantPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */; };
 		98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707C2BBE50BB00F81FD7 /* ContentView.swift */; };
 		98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707E2BBE50BB00F81FD7 /* Item.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlantPage.swift; sourceTree = "<group>"; };
 		98A770772BBE50BB00F81FD7 /* PlantPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPalApp.swift; sourceTree = "<group>"; };
 		98A7707C2BBE50BB00F81FD7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				98A770822BBE50BC00F81FD7 /* Preview Content */,
 				98A7708A2BBE533700F81FD7 /* PlantPage.swift */,
 				98A7708C2BBEC53600F81FD7 /* Plant.swift */,
+				3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */,
 			);
 			path = PlantPal;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */,
 				98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */,
 				98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */,
+				3F7269672BBFD3CB003B5574 /* AddPlantPage.swift in Sources */,
 				98A7707B2BBE50BB00F81FD7 /* PlantPalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
