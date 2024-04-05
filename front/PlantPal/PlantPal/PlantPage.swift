@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlantPage: View {
 
-    var plants: [Plant] = []
+    @Binding var plants: [Plant]
     
     var body: some View {
         ZStack {
@@ -36,3 +36,25 @@ struct PlantPage: View {
         
     }
 }
+
+/*struct PlantPage: View {
+    @Binding var plants: [Plant]
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Your Garden")
+                    .font(.title)
+                
+                List {
+                    ForEach(plants, id: \.self) { plant in
+                        NavigationLink(destination: Plant(name: plant.name, imageName: plant.imageName)) {
+                            Text(plant.name)
+                        }
+                    }
+                }
+            }
+            .navigationBarTitle("Your Garden")
+        }
+    }
+}*/

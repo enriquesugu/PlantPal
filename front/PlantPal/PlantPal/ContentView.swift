@@ -28,6 +28,7 @@ struct ContentView: View {
                         .padding(20)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
                     
+
                     Image(systemName: "snowflake")
                                 .font(.system(size: 38))
                                 .foregroundColor(Color.white)
