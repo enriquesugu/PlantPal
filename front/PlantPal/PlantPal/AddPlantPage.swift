@@ -45,7 +45,7 @@ struct AddPlantPage: View {
         }
         
         // Create a new plant instance based on the selected type and square meters
-        let plant = Plant(name: selectedPlant, imageName: selectedPlant.lowercased(), squareMeters: squareMeters)
+        let plant = Plant(name: selectedPlant, imageName: selectedPlant.lowercased(), squareMeters: squareMeters, baseWater: 5000)
         
         // Add the new plant to the plants array
         plants.append(plant)

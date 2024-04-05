@@ -17,6 +17,7 @@ struct ContentView: View {
     
     @State private var plants: [Plant] = []
     @State private var showingAddPlantPage = false
+    @ObservedObject var totalWaterSaved = TotalWaterSaved.shared
     
     var body: some View {
         NavigationStack {
@@ -32,7 +33,7 @@ struct ContentView: View {
                 Text("Since joining PlantPal you've saved over")
                     .font(.system(size: 16))
                     .foregroundStyle(.secondary)
-                Text("120.46L")
+                Text(String(format: "%.2f", TotalWaterSaved.shared.totalWaterSaved) + "L")
                     .foregroundColor(Color.green)
                     .font(.title)
                     .bold()
