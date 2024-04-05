@@ -24,7 +24,7 @@ struct AddPlantPage: View {
                 self.addPlant()
             }) {
                 HStack {
-                    Image("passionfruit") // Assuming you have an image named "passionfruit" in your assets
+                    Image("passionfruit")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
@@ -38,7 +38,7 @@ struct AddPlantPage: View {
                 self.addPlant()
             }) {
                 HStack {
-                    Image("strawberry") // Assuming you have an image named "strawberry" in your assets
+                    Image("strawberry")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)

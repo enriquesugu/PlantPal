@@ -11,7 +11,8 @@ import SwiftData
 struct ContentView: View {
     
     init() {
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Avenir Book", size: 48)!]
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font : UIFont.systemFont(ofSize: 36, weight: .bold)]
     }
     
     @State private var plants: [Plant] = []
@@ -19,30 +20,73 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
-                VStack {
-                    Text("Main screen")
+            VStack {
+                
+                HStack {
+                    Text("Welcome back Henry!\nIt's cool today...")
+                        .foregroundColor(Color.black)
+                        .padding(20)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
                     
+
+                    Image(systemName: "snowflake")
+                                .font(.system(size: 38))
+                                .foregroundColor(Color.white)
+                                .padding(20)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
+                }
+            
+                
+                Divider()
+                
+                Spacer()
+                
+                PlantPage(plants: $plants)
+                
+                Spacer()
+                
+                Divider()
+
+                HStack {
                     NavigationLink(destination: PlantPage(plants: $plants)) {
-                        Text("My Plants")
+                        Text("TBC BUTTON")
                     }
+                    .foregroundColor(Color(hex: 0xdad7cd))
+                    .padding(20)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
+                    
+                    Spacer()
                     
                     Button(action: {
                         showingAddPlantPage = true
                     }) {
                         Text("Add Plant")
                     }
+                    .foregroundColor(Color(hex: 0xdad7cd))
+                    .padding(20)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
                 }
-                .navigationBarTitle (Text("PlantPal"), displayMode: .inline)
+                .padding(48)
                 
-                /*.navigationDestination(for: String.self) { value in
-                    PlantPage()
-                }*/
+    
             }
+            .navigationBarTitle (Text("PlantPal"), displayMode: .inline)
+            .padding(.top, 0)
         }
         .sheet(isPresented: $showingAddPlantPage) {
             AddPlantPage(plants: $plants)
         }
+    }
+}
+
+extension Color {
+    init(hex: UInt, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xFF) / 255.0,
+            green: Double((hex >> 8) & 0xFF) / 255.0,
+            blue: Double((hex) & 0xFF) / 255.0,
+            opacity: alpha
+        )
     }
 }
