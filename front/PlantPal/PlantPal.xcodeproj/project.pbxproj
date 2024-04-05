@@ -13,6 +13,7 @@
 		98A770812BBE50BC00F81FD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98A770802BBE50BC00F81FD7 /* Assets.xcassets */; };
 		98A770842BBE50BC00F81FD7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */; };
 		98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708A2BBE533700F81FD7 /* PlantPage.swift */; };
+		98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708C2BBEC53600F81FD7 /* Plant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		98A770802BBE50BC00F81FD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98A7708A2BBE533700F81FD7 /* PlantPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPage.swift; sourceTree = "<group>"; };
+		98A7708C2BBEC53600F81FD7 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				98A770802BBE50BC00F81FD7 /* Assets.xcassets */,
 				98A770822BBE50BC00F81FD7 /* Preview Content */,
 				98A7708A2BBE533700F81FD7 /* PlantPage.swift */,
+				98A7708C2BBEC53600F81FD7 /* Plant.swift */,
 			);
 			path = PlantPal;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */,
 				98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */,
+				98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */,
 				98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */,
 				98A7707B2BBE50BB00F81FD7 /* PlantPalApp.swift in Sources */,
 			);
