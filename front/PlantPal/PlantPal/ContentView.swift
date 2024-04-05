@@ -24,7 +24,7 @@ struct ContentView: View {
                 VStack {
                     Text("Main screen")
                     
-                    NavigationLink(destination: PlantPage(plants: plants)) {
+                    NavigationLink(destination: PlantPage(plants: $plants)) {
                         Text("My Plants")
                     }
                     
