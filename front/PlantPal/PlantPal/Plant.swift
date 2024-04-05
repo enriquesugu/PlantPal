@@ -21,7 +21,7 @@ struct Plant: Hashable, View {
     
     let name: String
     let imageName: String
-    let squareMeters: Double?
+    let squareMeters: Double
     let baseWater: Double
     
     
@@ -96,7 +96,7 @@ struct Plant: Hashable, View {
         
         .task {
             do {
-                requiredWater = try await getRequiredWater(baseWater: String(baseWater), latitude: "-37.9023", longitude: "145.0173")
+                requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "-37.9023", longitude: "145.0173")
                 plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
             } catch WaterError.invalidURL {
                 print("invalidURL")
@@ -160,7 +160,7 @@ struct Plant: Hashable, View {
     
     func calculateWaterSaved(_ newValue: Bool) {
         if newValue {
-            waterSavedThisPlant += (baseWater/1000 - (requiredWater?.waterRequirementInLitres ?? baseWater))
+            waterSavedThisPlant += (baseWater * squareMeters/1000 - (requiredWater?.waterRequirementInLitres ?? baseWater))
             TotalWaterSaved.shared.updateTotalWaterSaved(amount: waterSavedThisPlant)
             print(TotalWaterSaved.shared.totalWaterSaved)
         }
