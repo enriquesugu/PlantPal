@@ -42,20 +42,14 @@ struct ContentView: View {
             }
             .padding(10)
             
+            Divider()
+            
+            GroupBox(label: Label("Your garden", systemImage: "leaf")) {
+                Divider()
+                PlantPage(plants: $plants)
+            }.padding(.horizontal, 10)
+            
             //Divider()
-            
-            HStack {
-                Text("Your garden")
-                    .bold()
-                    .font(.title2)
-                Spacer()
-            }
-            .padding(.horizontal, 10)
-            Divider()
-            
-            PlantPage(plants: $plants)
-            
-            Divider()
             
             Button("Add a new plant to your garden", systemImage: "plus",action: {
                 showingAddPlantPage = true
