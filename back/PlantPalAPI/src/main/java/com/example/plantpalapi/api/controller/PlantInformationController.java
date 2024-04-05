@@ -18,6 +18,6 @@ public class PlantInformationController {
 
     @GetMapping("plantInformation/")
     public String getPlantInformation(@RequestParam String type, @RequestParam String location) {
-        return plantService.getPlantInformation(type, location);
+        return plantService.getPlantInformation(type, location).toString();
     }
 }
