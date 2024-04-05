@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Charts
 
 struct Plant: Hashable, View {
     static func == (lhs: Plant, rhs: Plant) -> Bool {
@@ -23,121 +24,68 @@ struct Plant: Hashable, View {
     
     @State private var requiredWater: RequiredWater?
     @State private var plantInformation: PlantInformation?
+    @State private var isToggleOn = false
+    
+    let wateringData: [WateringData] = [
+        WateringData(date: "Fri", liters: 3.5),
+
+        WateringData(date: "Sat", liters: 2),
+
+        WateringData(date: "Sun", liters: 1.3),
+
+        WateringData(date: "Mon", liters: 3),
+
+        WateringData(date: "Tue", liters: 3.14),
+
+        WateringData(date: "Wed", liters: 2),
+
+        WateringData(date: "Thu", liters: 2.2),
+    ]
+    
     
     var body: some View {
       
-        VStack {
-            
-            ZStack {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 48)
-                    .edgesIgnoringSafeArea(.top)
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .fill(Color(hex: 0x588157))
-                        .frame(width: 200, height: 40)
-                    
-                    Text(name)
-                        .bold()
-                        .font(.title)
-                        .foregroundColor(Color(hex: 0xdad7cd))
-                }
-            }
-            Divider()
-            
-            
-            if (requiredWater == nil) {
-                ProgressView()
-            } else {
-//                VStack {
-//                    VStack {
-////                        Image(systemName: "oilcan")
-////                                    .font(.system(size: 38))
-////                                    .foregroundColor(Color(hex: 0xdad7cd))
-////                                    .padding(10)
-//                        
-//                        Text("You need to water your \(name) with " + String(format: "%.2f", requiredWater?.waterRequirementInLitres ?? 0.0) + "L today!")
-//                            .foregroundColor(Color(hex: 0xdad7cd))
-//                            .padding(20)
-//                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
-//                    }
-//                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
-//                    .padding(10)
-//                
-//                    HStack {
-//                        VStack {
-//                            Text("Hot tip!")
-//                                .foregroundColor(Color(hex: 0xdad7cd))
-//                                .fontWeight(.bold)
-//                                .padding(10)
-//                            Text("chatgpt here")
-//                                .foregroundColor(Color(hex: 0xdad7cd))
-//                                .padding(10)
-//                        }
-//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
-//                        .padding(10)
-//                    
-//                        
-//                        HStack {
-//                            Image(systemName: "trash.fill")
-//                                .font(.system(size: 38))
-//                                .foregroundColor(Color(hex: 0xdad7cd))
-//                                .padding(20)
-//                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0xe63946)))
-//                        }
-//                    }
-//                }
-//                .padding(10)
-                VStack {
-                    HStack {
-                        Text("Water Requirements")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(hex: 0x344e41))
-                        Spacer()
-                    }
-                    
-                    Text(requiredWater?.chatGPTHeadsUp ?? "")
-                        .font(.subheadline)
-                        .foregroundColor(Color.gray)
-                }
+        Text(name)
+            .bold()
+            .font(.title)
+            .padding(.bottom, 15)
+        
+        if (plantInformation == nil) {
+            ProgressView().padding(5)
+        } else {
+            Text(plantInformation?.gptTips ?? "")
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
                 .padding(.horizontal, 10)
-                
-                Divider()
-                
-                VStack {
-                    HStack {
-                        Text("Our Top Tip")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(hex: 0x344e41))
-                        Spacer()
-                    }
-                    
-                    Text(plantInformation?.gptTips ?? "")
-                        .font(.subheadline)
-                        .foregroundColor(Color.gray)
-                }
-                .padding(.horizontal, 10)
-                
-                Divider()
-                
-                
-            }
-            
-            Spacer()
-//            
-//            
-//            Image(imageName)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 180)
-           
-            
         }
+        
+        Divider()
+        
+        HStack {
+            GroupBox(label: Label("Today's Watering", systemImage: "calendar")) {
+                if (requiredWater == nil) {
+                    ProgressView().padding(10)
+                } else {
+                    Text(requiredWater?.chatGPTHeadsUp.replacingOccurrences(of: "\"", with: "") ?? "")
+                }
+                Divider()
+                Toggle(isOn: $isToggleOn) {
+                    Text("I've watered for the day!")
+                }
+            }
+        }
+        .padding(10)
+        
+        HStack {
+            GroupBox(label: Label("Previous 7 Days", systemImage: "sprinkler.and.droplets")) {
+                BarChartView(wateringData: wateringData)
+            }
+        }
+        .padding(10)
+        
+        
+            
+        
         .task {
             do {
                 requiredWater = try await getRequiredWater(baseWater: "5000", latitude: "-37.9023", longitude: "145.0173")
@@ -217,5 +165,32 @@ enum WaterError: Error {
     case invalidURL
     case invalidResponse
     case invalidData
+}
+
+struct WateringData: Identifiable {
+    let id: String = UUID().uuidString
+    
+    let date: String
+    let liters: Double
+    
+}
+
+struct BarChartView: View {
+
+    var wateringData: [WateringData]
+
+    var body: some View {
+       
+        Chart(wateringData) { item in
+            BarMark(
+                x: .value("Day of week", item.date),
+                y: .value("Num litres", item.liters),
+                stacking: .standard
+            )
+            .foregroundStyle(Color.green)
+            
+        }
+        .frame(height: 300)
+    }
 }
 
