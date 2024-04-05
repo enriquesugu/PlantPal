@@ -57,7 +57,9 @@ public class WeatherInformationService {
             double tomorrowsPrecip = jsonResponse.getJSONObject("daily").getJSONArray("rain_sum").getDouble(2);
             double totalPrecip = yesterdaysPrecip + todaysPrecip + tomorrowsPrecip;
 
-            output.put("waterRequirement", baseWater + averageET - totalPrecip);
+
+            // according to rainharvesting.com.au Roughly speaking, 1 millimetre of rain over 1 square metre of roof equals 1 litre of water.
+            output.put("waterRequirementInLitres", baseWater/1000 + averageET/1000 - totalPrecip);
             
             return output;
 
