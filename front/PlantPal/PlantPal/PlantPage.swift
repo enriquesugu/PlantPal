@@ -33,7 +33,3 @@ struct PlantPage: View {
         
     }
 }
-
-struct PlantTest: Hashable {
-    let name: String
-}
