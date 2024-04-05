@@ -16,6 +16,7 @@
 		98A770842BBE50BC00F81FD7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */; };
 		98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708A2BBE533700F81FD7 /* PlantPage.swift */; };
 		98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708C2BBEC53600F81FD7 /* Plant.swift */; };
+		98A7708F2BC0B60300F81FD7 /* TotalWaterSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */; };
 		CD22703A2BC02A23005FB7E5 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98A7708A2BBE533700F81FD7 /* PlantPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPage.swift; sourceTree = "<group>"; };
 		98A7708C2BBEC53600F81FD7 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterSaved.swift; sourceTree = "<group>"; };
 		CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				98A7708A2BBE533700F81FD7 /* PlantPage.swift */,
 				98A7708C2BBEC53600F81FD7 /* Plant.swift */,
 				3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */,
+				98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */,
 			);
 			path = PlantPal;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */,
 				3F7269672BBFD3CB003B5574 /* AddPlantPage.swift in Sources */,
 				98A7707B2BBE50BB00F81FD7 /* PlantPalApp.swift in Sources */,
+				98A7708F2BC0B60300F81FD7 /* TotalWaterSaved.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
