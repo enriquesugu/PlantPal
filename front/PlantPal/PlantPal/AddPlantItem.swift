@@ -20,7 +20,7 @@ struct AddPlantItem: View {
             HStack {
                 Text(plantName)
                 Spacer()
-                Image(plantName)
+                Image(plantName.lowercased())
                     .resizable()
                     .frame(width: 50, height: 50)
                     .aspectRatio(contentMode: .fit)
