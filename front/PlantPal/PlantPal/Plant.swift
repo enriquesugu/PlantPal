@@ -34,18 +34,11 @@ struct Plant: Hashable, View {
             
             Spacer()
             
-            GeometryReader { geometry in
-                        let maxWidth = geometry.size.width - 40
-                        let imageSize = CGSize(width: min(maxWidth, 240), height: .infinity)
-                        
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: imageSize.width, height: imageSize.height)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 0))
-                    }
-                    .padding(20)
+            
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 180)
            
                             
             Spacer()
@@ -54,7 +47,45 @@ struct Plant: Hashable, View {
             if (requiredWater == nil) {
                 ProgressView()
             } else {
-                Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
+                VStack {
+                    VStack {
+//                        Image(systemName: "oilcan")
+//                                    .font(.system(size: 38))
+//                                    .foregroundColor(Color(hex: 0xdad7cd))
+//                                    .padding(10)
+                        
+                        Text("You need to water your \(name) with " + String(format: "%.2f", requiredWater?.waterRequirementInLitres ?? 0.0) + "L today!")
+                            .foregroundColor(Color(hex: 0xdad7cd))
+                            .padding(20)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+                    }
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+                    .padding(10)
+                
+                    HStack {
+                        VStack {
+                            Text("Hot tip!")
+                                .foregroundColor(Color(hex: 0xdad7cd))
+                                .fontWeight(.bold)
+                                .padding(10)
+                            Text("chatgpt here")
+                                .foregroundColor(Color(hex: 0xdad7cd))
+                                .padding(10)
+                        }
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
+                        .padding(10)
+                    
+                        
+                        HStack {
+                            Image(systemName: "trash.fill")
+                                .font(.system(size: 38))
+                                .foregroundColor(Color(hex: 0xdad7cd))
+                                .padding(20)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0xe63946)))
+                        }
+                    }
+                }
+                .padding(10)
             }
             
         }
