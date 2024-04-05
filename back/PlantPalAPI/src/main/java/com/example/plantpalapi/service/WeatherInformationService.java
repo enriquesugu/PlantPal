@@ -1,8 +1,10 @@
 package com.example.plantpalapi.service;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.IOException;
@@ -57,7 +59,10 @@ public class WeatherInformationService {
             double tomorrowsPrecip = jsonResponse.getJSONObject("daily").getJSONArray("rain_sum").getDouble(2);
             double totalPrecip = yesterdaysPrecip + todaysPrecip + tomorrowsPrecip;
 
-            output.put("waterRequirement", baseWater + averageET - totalPrecip);
+            // according to rainharvesting.com.au Roughly speaking, 1 millimetre of rain over 1 square metre of roof equals 1 litre of water.
+            output.put("waterRequirementInLitres", baseWater/1000 + averageET/1000 - totalPrecip);
+
+            output.put("chatGPTHeadsUp", getChatGPTHeadsUp(baseWater, baseWater/1000 + averageET/1000 - totalPrecip, yesterdaysPrecip, todaysPrecip, tomorrowsPrecip, yesterdaysTemp, todaysTemp, tomorrowsTemp));
             
             return output;
 
@@ -73,5 +78,62 @@ public class WeatherInformationService {
 
     private double calculateAverageET(double yesterdaysET, double todaysET, double tomorrowsET) {
         return (yesterdaysET + todaysET + tomorrowsET) / 3;
+    }
+
+    private String getChatGPTHeadsUp(double baseWater, double actualWater, double yesterdaysPrecip, double todaysPrecip, double tomorrowsPrecip, double yesterdaysTemp, double todaysTemp, double tomorrowsTemp) {
+        String url = "https://api.openai.com/v1/chat/completions";
+        String model = "gpt-3.5-turbo";
+
+        Dotenv dotenv = null;
+        dotenv = Dotenv.configure().load();
+        String apiKey = dotenv.get("OPENAI_KEY");
+
+        String prompt = "We are making a plant watering application. Normally, we water this plant " + baseWater/1000 + "liters of water per square meter of plant. " +
+                "However, due to weather conditions such as yesterdays temperature and precipitation, todays temperature and precipitation and tomorrows temperature and precipitation, we are only going to suggest watering it " + actualWater +
+                "liters. Please provide me a friendly sentence that explains to the user why we are modifying their watering requirements." +
+                "I.e 'It's been real hot! You should really water this baby some more!" +
+                "Please mention the weather conditions you see as relevant." +
+                "Yesterdays precip: " + yesterdaysPrecip +
+                "Todays precip: " + todaysPrecip +
+                "Tomorrows precip: " + tomorrowsPrecip +
+                "Yesterdays temp: " + yesterdaysTemp +
+                "Todays temp: " + todaysTemp +
+                "Tomorrows temp: " + tomorrowsTemp +
+                "Be friendly and unique!";
+        try {
+            URL obj = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // The request body
+            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+            connection.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            writer.write(body);
+            writer.flush();
+            writer.close();
+
+            // Response from ChatGPT
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+
+            StringBuffer response = new StringBuffer();
+
+            while ((line = br.readLine()) != null) {
+                response.append(line);
+            }
+            br.close();
+
+            JSONObject output = new JSONObject();
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            System.out.println(jsonResponse.toString());
+
+            return jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
