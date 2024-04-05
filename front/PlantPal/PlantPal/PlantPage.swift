@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlantPage: View {
 
-    var plants: [Plant] = [.init(name: "Cactus", imageName: "Cactus"), .init(name: "Daisy", imageName: "Daisy"), .init(name: "Tomato", imageName: "Tomato")]
+    var plants: [Plant] = []
     
     var body: some View {
         ZStack {
