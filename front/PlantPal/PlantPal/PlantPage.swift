@@ -25,7 +25,7 @@ struct PlantPage: View {
                                 .foregroundColor(.black)
                                 .padding(20)
                                 .background(
-                                    Capsule().fill(Color.green.opacity(0.1 * (Double(index) + 1)))
+                                    Capsule().fill(Color.green.opacity(0.1 * (Double(index) + 1))).frame(minWidth: 300)
                                 )
                         }
                         .frame(maxWidth: .infinity)
