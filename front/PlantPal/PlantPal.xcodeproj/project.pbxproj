@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F7269672BBFD3CB003B5574 /* AddPlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */; };
+		3F7269692BC036B8003B5574 /* AddPlantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7269682BC036B8003B5574 /* AddPlantItem.swift */; };
 		98A7707B2BBE50BB00F81FD7 /* PlantPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */; };
 		98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707C2BBE50BB00F81FD7 /* ContentView.swift */; };
 		98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7707E2BBE50BB00F81FD7 /* Item.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlantPage.swift; sourceTree = "<group>"; };
+		3F7269682BC036B8003B5574 /* AddPlantItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantItem.swift; sourceTree = "<group>"; };
 		98A770772BBE50BB00F81FD7 /* PlantPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPalApp.swift; sourceTree = "<group>"; };
 		98A7707C2BBE50BB00F81FD7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		98A770792BBE50BB00F81FD7 /* PlantPal */ = {
 			isa = PBXGroup;
 			children = (
+				3F7269682BC036B8003B5574 /* AddPlantItem.swift */,
 				98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */,
 				98A7707C2BBE50BB00F81FD7 /* ContentView.swift */,
 				98A7707E2BBE50BB00F81FD7 /* Item.swift */,
@@ -151,6 +154,7 @@
 			files = (
 				98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */,
 				98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */,
+				3F7269692BC036B8003B5574 /* AddPlantItem.swift in Sources */,
 				98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */,
 				98A7707F2BBE50BB00F81FD7 /* Item.swift in Sources */,
 				3F7269672BBFD3CB003B5574 /* AddPlantPage.swift in Sources */,
