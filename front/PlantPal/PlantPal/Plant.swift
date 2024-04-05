@@ -48,19 +48,26 @@ struct Plant: Hashable, View {
         Text(name)
             .bold()
             .font(.title)
+            .padding(.bottom, 15)
         
-        Text(plantInformation?.gptTips ?? "")
-            .font(.system(size: 12))
-            .foregroundStyle(.secondary)
-            .padding(.horizontal, 10)
-        
-        Spacer()
+        if (plantInformation == nil) {
+            ProgressView().padding(5)
+        } else {
+            Text(plantInformation?.gptTips ?? "")
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 10)
+        }
         
         Divider()
         
         HStack {
             GroupBox(label: Label("Today's Watering", systemImage: "calendar")) {
-                Text(requiredWater?.chatGPTHeadsUp.replacingOccurrences(of: "\"", with: "") ?? "")
+                if (requiredWater == nil) {
+                    ProgressView().padding(10)
+                } else {
+                    Text(requiredWater?.chatGPTHeadsUp.replacingOccurrences(of: "\"", with: "") ?? "")
+                }
                 Divider()
                 Toggle(isOn: $isToggleOn) {
                     Text("I've watered for the day!")

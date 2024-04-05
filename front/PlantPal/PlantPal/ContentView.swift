@@ -20,59 +20,48 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                
-                HStack {
-                    Text("Welcome back Henry!\nIt's cool today...")
-                        .foregroundColor(Color.black)
-                        .padding(20)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
-                    
-
-                    Image(systemName: "snowflake")
-                                .font(.system(size: 38))
-                                .foregroundColor(Color.white)
-                                .padding(20)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
-                }
-                
-                Text("You've saved xx litres by using PlantPal")
-                
-                Divider()
-                
+            HStack {
+                Text("Welcome back, Henry!")
+                    .bold()
+                    .font(.title)
                 Spacer()
-                
-                PlantPage(plants: $plants)
-                
-                Spacer()
-                
-                Divider()
-
-                HStack {
-                    NavigationLink(destination: PlantPage(plants: $plants)) {
-                        Text("TBC BUTTON")
-                    }
-                    .foregroundColor(Color(hex: 0xdad7cd))
-                    .padding(20)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        showingAddPlantPage = true
-                    }) {
-                        Text("Add Plant")
-                    }
-                    .foregroundColor(Color(hex: 0xdad7cd))
-                    .padding(20)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
-                }
-                .padding(48)
-                
-    
             }
-            .navigationBarTitle (Text("PlantPal"), displayMode: .inline)
-            .padding(.top, 0)
+            .padding(.horizontal, 10)
+            
+            VStack {
+                Text("Since joining PlantPal you've saved over")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.secondary)
+                Text("120.46L")
+                    .foregroundColor(Color.green)
+                    .font(.title)
+                    .bold()
+                Text("of water. Keep it up!")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(10)
+            
+            //Divider()
+            
+            HStack {
+                Text("Your garden")
+                    .bold()
+                    .font(.title2)
+                Spacer()
+            }
+            .padding(.horizontal, 10)
+            Divider()
+            
+            PlantPage(plants: $plants)
+            
+            Divider()
+            
+            Button("Add a new plant to your garden", systemImage: "plus",action: {
+                showingAddPlantPage = true
+            })
+            .buttonStyle(.borderedProminent)
+            .tint(.green)
         }
         .sheet(isPresented: $showingAddPlantPage) {
             AddPlantPage(plants: $plants)
