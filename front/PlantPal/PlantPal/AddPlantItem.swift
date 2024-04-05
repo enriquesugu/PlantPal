@@ -10,9 +10,24 @@ import SwiftUI
 
 struct AddPlantItem: View {
 
-    @Binding var plantName: String
+    @State var plantName: String
+    @Binding var selectedPlant: String?
 
     var body: some View {
-        Text(plantName)
+        Button(action: {
+            selectedPlant = plantName
+        }) {
+            HStack {
+                Text(plantName)
+                Spacer()
+                Image(plantName)
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.green, lineWidth: 2))
+            }
+        }
+        .tint(.green)
     }
 }
