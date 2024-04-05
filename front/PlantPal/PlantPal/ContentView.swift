@@ -41,14 +41,14 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                PlantPage(plants: plants)
+                PlantPage(plants: $plants)
                 
                 Spacer()
                 
                 Divider()
 
                 HStack {
-                    NavigationLink(destination: PlantPage(plants: plants)) {
+                    NavigationLink(destination: PlantPage(plants: $plants)) {
                         Text("TBC BUTTON")
                     }
                     .foregroundColor(Color(hex: 0xdad7cd))
