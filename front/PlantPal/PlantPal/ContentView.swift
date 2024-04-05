@@ -35,7 +35,8 @@ struct ContentView: View {
                                 .padding(20)
                                 .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x90e0ef)))
                 }
-            
+                
+                Text("You've saved xx litres by using PlantPal")
                 
                 Divider()
                 

@@ -27,66 +27,114 @@ struct Plant: Hashable, View {
       
         VStack {
             
-            Text("\(name)")
-                .bold()
-                .font(.title)
-            
-            
-            Spacer()
-            
-            
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 180)
-           
-                            
-            Spacer()
+            ZStack {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 48)
+                    .edgesIgnoringSafeArea(.top)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color(hex: 0x588157))
+                        .frame(width: 200, height: 40)
+                    
+                    Text(name)
+                        .bold()
+                        .font(.title)
+                        .foregroundColor(Color(hex: 0xdad7cd))
+                }
+            }
+            Divider()
             
             
             if (requiredWater == nil) {
                 ProgressView()
             } else {
+//                VStack {
+//                    VStack {
+////                        Image(systemName: "oilcan")
+////                                    .font(.system(size: 38))
+////                                    .foregroundColor(Color(hex: 0xdad7cd))
+////                                    .padding(10)
+//                        
+//                        Text("You need to water your \(name) with " + String(format: "%.2f", requiredWater?.waterRequirementInLitres ?? 0.0) + "L today!")
+//                            .foregroundColor(Color(hex: 0xdad7cd))
+//                            .padding(20)
+//                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+//                    }
+//                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+//                    .padding(10)
+//                
+//                    HStack {
+//                        VStack {
+//                            Text("Hot tip!")
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .fontWeight(.bold)
+//                                .padding(10)
+//                            Text("chatgpt here")
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .padding(10)
+//                        }
+//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
+//                        .padding(10)
+//                    
+//                        
+//                        HStack {
+//                            Image(systemName: "trash.fill")
+//                                .font(.system(size: 38))
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .padding(20)
+//                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0xe63946)))
+//                        }
+//                    }
+//                }
+//                .padding(10)
                 VStack {
-                    VStack {
-//                        Image(systemName: "oilcan")
-//                                    .font(.system(size: 38))
-//                                    .foregroundColor(Color(hex: 0xdad7cd))
-//                                    .padding(10)
-                        
-                        Text("You need to water your \(name) with " + String(format: "%.2f", requiredWater?.waterRequirementInLitres ?? 0.0) + "L today!")
-                            .foregroundColor(Color(hex: 0xdad7cd))
-                            .padding(20)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
-                    }
-                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
-                    .padding(10)
-                
                     HStack {
-                        VStack {
-                            Text("Hot tip!")
-                                .foregroundColor(Color(hex: 0xdad7cd))
-                                .fontWeight(.bold)
-                                .padding(10)
-                            Text("chatgpt here")
-                                .foregroundColor(Color(hex: 0xdad7cd))
-                                .padding(10)
-                        }
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
-                        .padding(10)
-                    
-                        
-                        HStack {
-                            Image(systemName: "trash.fill")
-                                .font(.system(size: 38))
-                                .foregroundColor(Color(hex: 0xdad7cd))
-                                .padding(20)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0xe63946)))
-                        }
+                        Text("Water Requirements")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: 0x344e41))
+                        Spacer()
                     }
+                    
+                    Text("Hey there plant parent! With the recent sunny days and warm temperatures, your leafy friend could use a little extra love in the form of 5.1 liters of water per square meter. Let's keep those roots happy and hydrated! 🌿💦")
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
                 }
-                .padding(10)
+                .padding(.horizontal, 10)
+                
+                Divider()
+                
+                VStack {
+                    HStack {
+                        Text("Our Top Tip")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: 0x344e41))
+                        Spacer()
+                    }
+                    
+                    Text("When caring for your tomatoes in Melbourne, be sure to give them plenty of sunlight as they thrive in warm weather. Water your plants regularly, making sure not to overwater as they can be sensitive to too much moisture. Keep an eye out for pests like aphids and caterpillars, and remove them promptly to prevent damage to your plants. Happy gardening!")
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
+                }
+                .padding(.horizontal, 10)
+                
+                Divider()
+                
+                
             }
+            
+            Spacer()
+//            
+//            
+//            Image(imageName)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 180)
+           
             
         }
         .task {
