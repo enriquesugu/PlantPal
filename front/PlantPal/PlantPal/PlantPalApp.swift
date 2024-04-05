@@ -26,6 +26,7 @@ struct PlantPalApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .background(Color(hex: 0xdad7cd))
         }
         .modelContainer(sharedModelContainer)
     }

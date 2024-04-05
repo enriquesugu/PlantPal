@@ -25,34 +25,119 @@ struct Plant: Hashable, View {
     @State private var plantInformation: PlantInformation?
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
-            VStack {
-                Image("\(imageName)")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                Text("\(name)")
-                    .bold()
-                //Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")
+      
+        VStack {
+            
+            ZStack {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 48)
+                    .edgesIgnoringSafeArea(.top)
                 
-                if (requiredWater == nil) {
-                    ProgressView()
-                } else {
-                    Text("Today you will need \(requiredWater?.waterRequirementInLitres ?? 0.0) litres of water.")
-                    Spacer()
-                        .frame(height: 50)
-                    Text("\(requiredWater?.chatGPTHeadsUp ?? "")")
-                    Spacer()
-                        .frame(height: 50)
-                    Text("\(plantInformation?.gptTips ?? "")")
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color(hex: 0x588157))
+                        .frame(width: 200, height: 40)
+                    
+                    Text(name)
+                        .bold()
+                        .font(.title)
+                        .foregroundColor(Color(hex: 0xdad7cd))
                 }
+            }
+            Divider()
+            
+            
+            if (requiredWater == nil) {
+                ProgressView()
+            } else {
+//                VStack {
+//                    VStack {
+////                        Image(systemName: "oilcan")
+////                                    .font(.system(size: 38))
+////                                    .foregroundColor(Color(hex: 0xdad7cd))
+////                                    .padding(10)
+//                        
+//                        Text("You need to water your \(name) with " + String(format: "%.2f", requiredWater?.waterRequirementInLitres ?? 0.0) + "L today!")
+//                            .foregroundColor(Color(hex: 0xdad7cd))
+//                            .padding(20)
+//                            .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+//                    }
+//                    .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x344e41)))
+//                    .padding(10)
+//                
+//                    HStack {
+//                        VStack {
+//                            Text("Hot tip!")
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .fontWeight(.bold)
+//                                .padding(10)
+//                            Text("chatgpt here")
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .padding(10)
+//                        }
+//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0x588157)))
+//                        .padding(10)
+//                    
+//                        
+//                        HStack {
+//                            Image(systemName: "trash.fill")
+//                                .font(.system(size: 38))
+//                                .foregroundColor(Color(hex: 0xdad7cd))
+//                                .padding(20)
+//                                .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: 0xe63946)))
+//                        }
+//                    }
+//                }
+//                .padding(10)
+                VStack {
+                    HStack {
+                        Text("Water Requirements")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: 0x344e41))
+                        Spacer()
+                    }
+                    
+                    Text(chatGPTHeadsUp)
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
+                }
+                .padding(.horizontal, 10)
+                
+                Divider()
+                
+                VStack {
+                    HStack {
+                        Text("Our Top Tip")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: 0x344e41))
+                        Spacer()
+                    }
+                    
+                    Text(gptTips)
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
+                }
+                .padding(.horizontal, 10)
+                
+                Divider()
+                
                 
             }
             
+            Spacer()
+//            
+//            
+//            Image(imageName)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 180)
+           
             
         }
-        .edgesIgnoringSafeArea(.all)
         .task {
             do {
                 requiredWater = try await getRequiredWater(baseWater: "5000", latitude: "-37.9023", longitude: "145.0173")
@@ -133,3 +218,4 @@ enum WaterError: Error {
     case invalidResponse
     case invalidData
 }
+
