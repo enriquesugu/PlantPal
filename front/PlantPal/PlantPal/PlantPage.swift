@@ -14,19 +14,22 @@ struct PlantPage: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
-            VStack {
-                Text("Hello world")
-                
-                ForEach(plants, id: \.self) { plant in
-                    NavigationLink(value: plant) {
-                        Text(plant.name)
+            //LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
+            ScrollView {
+                VStack {
+                    ForEach(plants, id: \.self) { plant in
+                        NavigationLink(value: plant) {
+                            Text(plant.name)
+                        }
+                        .foregroundColor(Color(hex: 0xdad7cd))
+                            .padding(20)
+                            .background(RoundedRectangle(cornerRadius: 5).fill(Color(hex: 0x344e41)))
                     }
                 }
-            }
-            .navigationTitle("Your Garden")
-            .navigationDestination(for: Plant.self) { value in
-                Plant(name: value.name, imageName: value.imageName)
+                .navigationTitle("PlantPal")
+                .navigationDestination(for: Plant.self) { value in
+                    Plant(name: value.name, imageName: value.imageName)
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
