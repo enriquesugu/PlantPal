@@ -100,7 +100,7 @@ struct Plant: Hashable, View {
                         Spacer()
                     }
                     
-                    Text(chatGPTHeadsUp)
+                    Text(requiredWater?.chatGPTHeadsUp ?? "")
                         .font(.subheadline)
                         .foregroundColor(Color.gray)
                 }
@@ -117,7 +117,7 @@ struct Plant: Hashable, View {
                         Spacer()
                     }
                     
-                    Text(gptTips)
+                    Text(plantInformation?.gptTips ?? "")
                         .font(.subheadline)
                         .foregroundColor(Color.gray)
                 }
