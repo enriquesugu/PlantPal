@@ -16,6 +16,7 @@
 		98A770842BBE50BC00F81FD7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */; };
 		98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708A2BBE533700F81FD7 /* PlantPage.swift */; };
 		98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708C2BBEC53600F81FD7 /* Plant.swift */; };
+		CD22703A2BC02A23005FB7E5 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		98A770832BBE50BC00F81FD7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98A7708A2BBE533700F81FD7 /* PlantPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPage.swift; sourceTree = "<group>"; };
 		98A7708C2BBEC53600F81FD7 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				3F7269682BC036B8003B5574 /* AddPlantItem.swift */,
 				98A7707A2BBE50BB00F81FD7 /* PlantPalApp.swift */,
+				CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */,
 				98A7707C2BBE50BB00F81FD7 /* ContentView.swift */,
 				98A7707E2BBE50BB00F81FD7 /* Item.swift */,
 				98A770802BBE50BC00F81FD7 /* Assets.xcassets */,
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD22703A2BC02A23005FB7E5 /* SplashScreenView.swift in Sources */,
 				98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */,
 				98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */,
 				3F7269692BC036B8003B5574 /* AddPlantItem.swift in Sources */,
@@ -292,7 +296,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPal/Preview Content\"";
-				DEVELOPMENT_TEAM = 3K8BQC2F49;
+				DEVELOPMENT_TEAM = 63RP585YYP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -305,7 +309,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaiyuan.PlantPal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sug.PlantPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -321,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPal/Preview Content\"";
-				DEVELOPMENT_TEAM = 3K8BQC2F49;
+				DEVELOPMENT_TEAM = 63RP585YYP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -334,7 +338,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaiyuan.PlantPal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sug.PlantPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
