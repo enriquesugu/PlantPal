@@ -24,28 +24,40 @@ struct Plant: Hashable, View {
     @State private var requiredWater: RequiredWater?
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [.clear, .green]), startPoint: .init(x: 0.5, y: 0.8), endPoint: .bottom)
-            VStack {
-                Image("\(imageName)")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                Text("\(name)")
-                    .bold()
-                //Text("You need \(requiredWater?.waterRequirementInLitres) litres of water" ?? "Placeholder")
-                
-                if (requiredWater == nil) {
-                    ProgressView()
-                } else {
-                    Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
-                }
-                
+      
+        VStack {
+            
+            Text("\(name)")
+                .bold()
+                .font(.title)
+            
+            
+            Spacer()
+            
+            GeometryReader { geometry in
+                        let maxWidth = geometry.size.width - 40
+                        let imageSize = CGSize(width: min(maxWidth, 240), height: .infinity)
+                        
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: imageSize.width, height: imageSize.height)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 0))
+                    }
+                    .padding(20)
+           
+                            
+            Spacer()
+            
+            
+            if (requiredWater == nil) {
+                ProgressView()
+            } else {
+                Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
             }
             
-            
         }
-        .edgesIgnoringSafeArea(.all)
         .task {
             do {
                 requiredWater = try await getRequiredWater(baseWater: "5000", latitude: "-37.9023", longitude: "145.0173")
@@ -105,3 +117,4 @@ enum WaterError: Error {
     case invalidResponse
     case invalidData
 }
+
