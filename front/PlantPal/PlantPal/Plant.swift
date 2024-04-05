@@ -39,6 +39,9 @@ struct Plant: Hashable, View {
                     ProgressView()
                 } else {
                     Text("\(requiredWater?.waterRequirementInLitres ?? 0.0)")
+                    Spacer()
+                        .frame(height: 50)
+                    Text("\(requiredWater?.chatGPTHeadsUp ?? "")")
                 }
                 
             }
