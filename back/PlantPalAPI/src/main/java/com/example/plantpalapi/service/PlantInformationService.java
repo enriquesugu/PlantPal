@@ -30,7 +30,7 @@ public class PlantInformationService {
         String prompt = "Give me some plant care tips for " + type + "in " + location +
                 ". We are making a plant/garden care application, so don't give me more than 3 sentences worth of information." +
                 "Have a friendly tone, and be considerate of the unique type of plant, and the weather considerations of the location, assuming the plant will be outside and exposed to the weather" +
-                "Don't give any exact numbers for watering, because we have a function which does that already.";
+                "Don't give any exact numbers for watering, because we have a function which does that already. Keep your answer to less than 20 words";
 
         try {
             URL obj = new URL(url);
