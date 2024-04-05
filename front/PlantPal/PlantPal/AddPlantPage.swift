@@ -46,6 +46,19 @@ struct AddPlantPage: View {
                         .padding()
                 }
             }
+            Button(action: {
+                self.selectedPlant = "Tomato"
+                self.addPlant()
+            }) {
+                HStack {
+                    Image("tomato")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                    Text("Tomato")
+                        .padding()
+                }
+            }
             
             Spacer()
         }
