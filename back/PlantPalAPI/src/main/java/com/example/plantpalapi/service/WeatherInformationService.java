@@ -105,8 +105,7 @@ public class WeatherInformationService {
                 "Yesterdays temp: " + yesterdaysTemp +
                 "Todays temp: " + todaysTemp +
                 "Tomorrows temp: " + tomorrowsTemp +
-                "Be friendly and unique! Keep your response to strictly one sentence, no need to introduce yourself or say hello. Use an emoji. Keep in mind we are in Australia when giving your temperature analysis, 25 isn't hot hot like the rest of the world. Make sure to include the number of liters to water with with 2 decimal places" +
-                "If the that you say is negative, just say no water is required today.";
+                "Be friendly and unique! Keep your response to strictly one sentence, no need to introduce yourself or say hello. Use an emoji. Keep in mind we are in Australia when giving your temperature analysis, 25 isn't hot hot like the rest of the world. Make sure to include the number of liters to water with with 2 decimal places";
         try {
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
