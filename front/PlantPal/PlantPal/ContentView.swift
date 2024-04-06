@@ -23,18 +23,21 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            HStack {
-                Image("PlantPalSmall")
+            HStack(alignment: .center, content: {
+                Text("Welcome back, Henry!")
+                                    .bold()
+                                    .font(.title)
+                                Spacer()
+                Image("transicon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 150, height: 50)
-            }
+                    .frame(width: 50, height: 45)
+                //Spacer()
+            })
             .padding(.horizontal, 10)
             
+            
             VStack {
-                Text("Welcome back!")
-                    .font(.system(size: 16))
-                    .foregroundStyle(.secondary)
                 Text("Since joining PlantPal you've saved over")
                     .font(.system(size: 16))
                     .foregroundStyle(.secondary)

@@ -11,6 +11,7 @@ import SwiftUI
 struct PlantPage: View {
 
     @Binding var plants: [Plant]
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {
@@ -22,7 +23,7 @@ struct PlantPage: View {
                     ForEach(Array(plants.enumerated()), id: \.offset) { index, plant in
                         NavigationLink(destination: Plant(name: plant.self.name, imageName: plant.self.imageName,squareMeters: plant.self.squareMeters, baseWater: plant.self.baseWater)) {
                             Text(plant.name)
-                                .foregroundColor(.black)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                 .padding(20)
                                 .background(
                                     Capsule().fill(Color.green.opacity(0.1 * (Double(index) + 1))).frame(minWidth: 300)
