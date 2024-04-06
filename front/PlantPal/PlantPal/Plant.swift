@@ -30,6 +30,8 @@ struct Plant: Hashable, View {
     @State private var isToggleOn = false
     @State private var waterSavedThisPlant = 0.0
     
+    @EnvironmentObject var locationManager: LocationManager
+    
     let wateringData: [WateringData] = [
         WateringData(date: "Fri", liters: 3.5),
 
@@ -96,8 +98,16 @@ struct Plant: Hashable, View {
         
         .task {
             do {
-                requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "-37.9023", longitude: "145.0173")
-                plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                if let coordinates = locationManager.userLocation {
+                    requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
+                    plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                    print(coordinates.latitude)
+                    print(coordinates.longitude)
+                } else {
+                    requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "-37.9023", longitude: "145.0173")
+                    plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                }
+                
             } catch WaterError.invalidURL {
                 print("invalidURL")
             } catch WaterError.invalidResponse {
