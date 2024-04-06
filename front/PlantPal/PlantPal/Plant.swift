@@ -21,10 +21,16 @@ struct Plant: Hashable, View {
     
     let name: String
     let imageName: String
+    let squareMeters: Double
+    let baseWater: Double
+    
     
     @State private var requiredWater: RequiredWater?
     @State private var plantInformation: PlantInformation?
     @State private var isToggleOn = false
+    @State private var waterSavedThisPlant = 0.0
+    
+    @EnvironmentObject var locationManager: LocationManager
     
     let wateringData: [WateringData] = [
         WateringData(date: "Fri", liters: 3.5),
@@ -71,6 +77,10 @@ struct Plant: Hashable, View {
                 Divider()
                 Toggle(isOn: $isToggleOn) {
                     Text("I've watered for the day!")
+                        
+                }
+                .onChange(of: isToggleOn) { newValue in
+                    calculateWaterSaved(newValue)
                 }
             }
         }
@@ -88,8 +98,16 @@ struct Plant: Hashable, View {
         
         .task {
             do {
-                requiredWater = try await getRequiredWater(baseWater: "5000", latitude: "-37.9023", longitude: "145.0173")
-                plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                if let coordinates = locationManager.userLocation {
+                    requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "\(coordinates.latitude)", longitude: "\(coordinates.longitude)")
+                    plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                    print(coordinates.latitude)
+                    print(coordinates.longitude)
+                } else {
+                    requiredWater = try await getRequiredWater(baseWater: String(baseWater * squareMeters), latitude: "-37.9023", longitude: "145.0173")
+                    plantInformation = try await getPlantInformation(type: name, location: "Melbourne")
+                }
+                
             } catch WaterError.invalidURL {
                 print("invalidURL")
             } catch WaterError.invalidResponse {
@@ -149,6 +167,15 @@ struct Plant: Hashable, View {
             throw WaterError.invalidData
         }
     }
+    
+    func calculateWaterSaved(_ newValue: Bool) {
+        if newValue {
+            waterSavedThisPlant += (baseWater * squareMeters/1000 - (requiredWater?.waterRequirementInLitres ?? baseWater))
+            TotalWaterSaved.shared.updateTotalWaterSaved(amount: waterSavedThisPlant)
+            print(TotalWaterSaved.shared.totalWaterSaved)
+        }
+    }
+
 }
 
 struct RequiredWater: Codable {

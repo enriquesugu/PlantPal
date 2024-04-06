@@ -12,34 +12,46 @@ struct AddPlantPage: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var plants: [Plant]
     @State private var selectedPlant: String?
-    
+    @State private var squareMeters: String = ""
     
     var body: some View {
-        
-        List {
-            //AddPlantItem(plantName: "Mint")
-            AddPlantItem(plantName: "Strawberry", selectedPlant: $selectedPlant)
-            AddPlantItem(plantName: "Tomato", selectedPlant: $selectedPlant)
-            AddPlantItem(plantName: "Passionfruit", selectedPlant: $selectedPlant)
-        }
-        
-        .onChange(of: selectedPlant) { newVal in
-            addPlant()
-                
+        VStack {
+            List {
+                AddPlantItem(plantName: "Strawberry", selectedPlant: $selectedPlant)
+                AddPlantItem(plantName: "Tomato", selectedPlant: $selectedPlant)
+                AddPlantItem(plantName: "Passionfruit", selectedPlant: $selectedPlant)
+            }
+            
+            if selectedPlant != nil {
+                TextField("Input square meters allocated for this plant", text: $squareMeters)
+                    .keyboardType(.decimalPad) // Restricts input to numbers only
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+            }
+            
+            Button("Get Growing!", systemImage: "plus", action: {
+                addPlant()
+             })
+            .buttonStyle(.borderedProminent)
+            .tint(.green)
+            
         }
     }
     
     func addPlant() {
-        if let selectedPlant = selectedPlant {
-            // Create a new plant instance based on the selected type
-            let plant = Plant(name: selectedPlant, imageName: selectedPlant.lowercased())
-            
-            // Add the new plant to the plants array
-            plants.append(plant)
-            
-            // Dismiss the AddPlantPage
-            presentationMode.wrappedValue.dismiss()
+        guard let selectedPlant = selectedPlant,
+              let squareMeters = Double(squareMeters) else {
+            return
         }
+        
+        // Create a new plant instance based on the selected type and square meters
+        let plant = Plant(name: selectedPlant, imageName: selectedPlant.lowercased(), squareMeters: squareMeters, baseWater: 5000)
+        
+        // Add the new plant to the plants array
+        plants.append(plant)
+        
+        // Dismiss the AddPlantPage
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
