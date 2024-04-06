@@ -33,19 +33,34 @@ struct Plant: Hashable, View {
     @EnvironmentObject var locationManager: LocationManager
     
     let wateringData: [WateringData] = [
-        WateringData(date: "Fri", liters: 3.5),
+        WateringData(date: "Fri", liters: 3.5, type: .naturalRain),
+        WateringData(date: "Fri", liters: 1.2, type: .yourWater),
+        WateringData(date: "Fri", liters: 0.3, type: .tempAndET),
+        
+        WateringData(date: "Sat", liters: 1.9, type: .naturalRain),
+        WateringData(date: "Sat", liters: 1.6, type: .yourWater),
+        WateringData(date: "Sat", liters: 1.5, type: .tempAndET),
 
-        WateringData(date: "Sat", liters: 2),
+        WateringData(date: "Sun", liters: 3.1, type: .naturalRain),
+        WateringData(date: "Sun", liters: 1.0, type: .yourWater),
+        WateringData(date: "Sun", liters: 0.9, type: .tempAndET),
 
-        WateringData(date: "Sun", liters: 1.3),
+        WateringData(date: "Mon", liters: 2.5, type: .naturalRain),
+        WateringData(date: "Mon", liters: 2.0, type: .yourWater),
+        WateringData(date: "Mon", liters: 0.5, type: .tempAndET),
 
-        WateringData(date: "Mon", liters: 3),
+        WateringData(date: "Tue", liters: 1.5, type: .naturalRain),
+        WateringData(date: "Tue", liters: 3.2, type: .yourWater),
+        WateringData(date: "Tue", liters: 0.3, type: .tempAndET),
 
-        WateringData(date: "Tue", liters: 3.14),
+        WateringData(date: "Wed", liters: 0.1, type: .naturalRain),
+        WateringData(date: "Wed", liters: 4.1, type: .yourWater),
+        WateringData(date: "Wed", liters: 0.8, type: .tempAndET),
 
-        WateringData(date: "Wed", liters: 2),
+        WateringData(date: "Thu", liters: 0.8, type: .naturalRain),
+        WateringData(date: "Thu", liters: 3.5, type: .yourWater),
+        WateringData(date: "Thu", liters: 0.7, type: .tempAndET)
 
-        WateringData(date: "Thu", liters: 2.2),
     ]
     
     
@@ -89,6 +104,16 @@ struct Plant: Hashable, View {
         HStack {
             GroupBox(label: Label("Previous 7 Days", systemImage: "sprinkler.and.droplets")) {
                 BarChartView(wateringData: wateringData)
+                HStack(spacing: 6) {
+                    ForEach(WateringType.allCases, id: \.self) { type in
+                        Circle()
+                            .fill(type.color)
+                            .frame(width: 8, height: 8)
+                        Text(type.rawValue)
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(type.color)
+                    }
+                }
             }
         }
         .padding(10)
@@ -194,11 +219,29 @@ enum WaterError: Error {
     case invalidData
 }
 
+enum WateringType: String, CaseIterable {
+    case naturalRain = "Natural Rain"
+    case yourWater = "Your Water"
+    case tempAndET = "Temperature and ET"
+
+    var color: Color {
+        switch self {
+        case .naturalRain:
+            return .green
+        case .yourWater:
+            return .yellow
+        case .tempAndET:
+            return .pink
+        }
+    }
+}
+
 struct WateringData: Identifiable {
     let id: String = UUID().uuidString
     
     let date: String
     let liters: Double
+    let type: WateringType
     
 }
 
@@ -214,10 +257,23 @@ struct BarChartView: View {
                 y: .value("Num litres", item.liters),
                 stacking: .standard
             )
-            .foregroundStyle(Color.green)
+            .foregroundStyle(item.type.color)
             
         }
         .frame(height: 300)
+        .chartLegend(.visible)
+//        .chartLegend(position: .bottom, alignment: .leading, spacing: 24, content: {
+//            HStack(spacing: 6) {
+//                ForEach(WateringType.allCases, id: \.self) { type in
+//                    Circle()
+//                        .fill(type.color)
+//                        .frame(width: 8, height: 8)
+//                    Text(type.rawValue)
+//                        .font(.system(size: 11, weight: .medium))
+//                        .foregroundColor(type.color)
+//                }
+//            }
+//        })
     }
 }
 
