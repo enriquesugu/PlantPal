@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SplashScreenView: View {
     @State private var isActive = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
 
@@ -17,7 +18,7 @@ struct SplashScreenView: View {
         } else {
             VStack {
                 VStack {
-                    Image("PlantPal")
+                    Image(colorScheme == .dark ? "PlantPalDark" : "PlantPal")
                         .font(.system(size : 80))
                 }
             }
