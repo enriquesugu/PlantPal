@@ -28,8 +28,6 @@ struct ContentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 50)
-                    .padding(.leading, 10)
-                //Spacer()
             }
             .padding(.horizontal, 10)
             
