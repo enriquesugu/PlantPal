@@ -17,6 +17,7 @@
 		98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708A2BBE533700F81FD7 /* PlantPage.swift */; };
 		98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708C2BBEC53600F81FD7 /* Plant.swift */; };
 		98A7708F2BC0B60300F81FD7 /* TotalWaterSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */; };
+		98A770912BC0C0AD00F81FD7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A770902BC0C0AD00F81FD7 /* LocationManager.swift */; };
 		CD22703A2BC02A23005FB7E5 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		98A7708A2BBE533700F81FD7 /* PlantPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPage.swift; sourceTree = "<group>"; };
 		98A7708C2BBEC53600F81FD7 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterSaved.swift; sourceTree = "<group>"; };
+		98A770902BC0C0AD00F81FD7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CD2270392BC02A23005FB7E5 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 				98A7708C2BBEC53600F81FD7 /* Plant.swift */,
 				3F7269662BBFD3CB003B5574 /* AddPlantPage.swift */,
 				98A7708E2BC0B60300F81FD7 /* TotalWaterSaved.swift */,
+				98A770902BC0C0AD00F81FD7 /* LocationManager.swift */,
 			);
 			path = PlantPal;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			files = (
 				CD22703A2BC02A23005FB7E5 /* SplashScreenView.swift in Sources */,
 				98A7708B2BBE533700F81FD7 /* PlantPage.swift in Sources */,
+				98A770912BC0C0AD00F81FD7 /* LocationManager.swift in Sources */,
 				98A7707D2BBE50BB00F81FD7 /* ContentView.swift in Sources */,
 				3F7269692BC036B8003B5574 /* AddPlantItem.swift in Sources */,
 				98A7708D2BBEC53600F81FD7 /* Plant.swift in Sources */,
@@ -303,6 +307,7 @@
 				DEVELOPMENT_TEAM = 63RP585YYP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use your location to obtain plant care tips";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,6 +337,7 @@
 				DEVELOPMENT_TEAM = 63RP585YYP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use your location to obtain plant care tips";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

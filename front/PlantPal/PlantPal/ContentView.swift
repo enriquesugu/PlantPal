@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreLocation
 
 struct ContentView: View {
     
@@ -18,6 +19,7 @@ struct ContentView: View {
     @State private var plants: [Plant] = []
     @State private var showingAddPlantPage = false
     @ObservedObject var totalWaterSaved = TotalWaterSaved.shared
+    @StateObject private var locationManager = LocationManager()
     
     var body: some View {
         NavigationStack {
@@ -61,6 +63,7 @@ struct ContentView: View {
         .sheet(isPresented: $showingAddPlantPage) {
             AddPlantPage(plants: $plants)
         }
+        .environmentObject(locationManager)
     }
 }
 
