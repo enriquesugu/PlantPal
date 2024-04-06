@@ -60,9 +60,15 @@ public class WeatherInformationService {
             double totalPrecip = yesterdaysPrecip + todaysPrecip + tomorrowsPrecip;
 
             // according to rainharvesting.com.au Roughly speaking, 1 millimetre of rain over 1 square metre of roof equals 1 litre of water.
-            output.put("waterRequirementInLitres", baseWater/1000 + averageET/1000 - totalPrecip);
+            double outreq;
+            if (baseWater/1000 + averageET/1000 - totalPrecip < 0) {
+                outreq = 0.0;
+            } else {
+                outreq = baseWater/1000 + averageET/1000 - totalPrecip;
+            }
+            output.put("waterRequirementInLitres", outreq);
 
-            output.put("chatGPTHeadsUp", getChatGPTHeadsUp(baseWater, baseWater/1000 + averageET/1000 - totalPrecip, yesterdaysPrecip, todaysPrecip, tomorrowsPrecip, yesterdaysTemp, todaysTemp, tomorrowsTemp));
+            output.put("chatGPTHeadsUp", getChatGPTHeadsUp(baseWater, outreq, yesterdaysPrecip, todaysPrecip, tomorrowsPrecip, yesterdaysTemp, todaysTemp, tomorrowsTemp));
             
             return output;
 
@@ -99,7 +105,8 @@ public class WeatherInformationService {
                 "Yesterdays temp: " + yesterdaysTemp +
                 "Todays temp: " + todaysTemp +
                 "Tomorrows temp: " + tomorrowsTemp +
-                "Be friendly and unique! Keep your response to one sentence. Use an emoji. Keep in mind we are in Australia when giving your temperature analysis, 25 isn't hot hot like the rest of the world. Make sure to include the number of liters to water with with 2 decimal places";
+                "Be friendly and unique! Keep your response to strictly one sentence, no need to introduce yourself or say hello. Use an emoji. Keep in mind we are in Australia when giving your temperature analysis, 25 isn't hot hot like the rest of the world. Make sure to include the number of liters to water with with 2 decimal places" +
+                "If the that you say is negative, just say no water is required today.";
         try {
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();

@@ -170,7 +170,7 @@ struct Plant: Hashable, View {
     
     func calculateWaterSaved(_ newValue: Bool) {
         if newValue {
-            waterSavedThisPlant += (baseWater * squareMeters/1000 - (requiredWater?.waterRequirementInLitres ?? baseWater))
+            waterSavedThisPlant += baseWater/1000 - (requiredWater?.waterRequirementInLitres ?? baseWater)
             TotalWaterSaved.shared.updateTotalWaterSaved(amount: waterSavedThisPlant)
             print(TotalWaterSaved.shared.totalWaterSaved)
         }
