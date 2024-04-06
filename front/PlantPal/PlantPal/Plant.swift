@@ -34,32 +34,39 @@ struct Plant: Hashable, View {
     
     let wateringData: [WateringData] = [
         WateringData(date: "Fri", liters: 3.5, type: .naturalRain),
-        WateringData(date: "Fri", liters: 1.2, type: .yourWater),
         WateringData(date: "Fri", liters: 0.3, type: .tempAndET),
+        WateringData(date: "Fri", liters: 1.2, type: .yourWater),
+        
         
         WateringData(date: "Sat", liters: 1.9, type: .naturalRain),
-        WateringData(date: "Sat", liters: 1.6, type: .yourWater),
         WateringData(date: "Sat", liters: 1.5, type: .tempAndET),
+        WateringData(date: "Sat", liters: 1.6, type: .yourWater),
+        
 
         WateringData(date: "Sun", liters: 3.1, type: .naturalRain),
-        WateringData(date: "Sun", liters: 1.0, type: .yourWater),
         WateringData(date: "Sun", liters: 0.9, type: .tempAndET),
+        WateringData(date: "Sun", liters: 1.0, type: .yourWater),
+        
 
         WateringData(date: "Mon", liters: 2.5, type: .naturalRain),
-        WateringData(date: "Mon", liters: 2.0, type: .yourWater),
         WateringData(date: "Mon", liters: 0.5, type: .tempAndET),
+        WateringData(date: "Mon", liters: 2.0, type: .yourWater),
+        
 
         WateringData(date: "Tue", liters: 1.5, type: .naturalRain),
-        WateringData(date: "Tue", liters: 3.2, type: .yourWater),
         WateringData(date: "Tue", liters: 0.3, type: .tempAndET),
+        WateringData(date: "Tue", liters: 3.2, type: .yourWater),
+        
 
         WateringData(date: "Wed", liters: 0.1, type: .naturalRain),
-        WateringData(date: "Wed", liters: 4.1, type: .yourWater),
         WateringData(date: "Wed", liters: 0.8, type: .tempAndET),
+        WateringData(date: "Wed", liters: 4.1, type: .yourWater),
+        
 
         WateringData(date: "Thu", liters: 0.8, type: .naturalRain),
+        WateringData(date: "Thu", liters: 0.7, type: .tempAndET),
         WateringData(date: "Thu", liters: 3.5, type: .yourWater),
-        WateringData(date: "Thu", liters: 0.7, type: .tempAndET)
+        
 
     ]
     
@@ -221,17 +228,17 @@ enum WaterError: Error {
 
 enum WateringType: String, CaseIterable {
     case naturalRain = "Natural Rain"
-    case yourWater = "Your Water"
     case tempAndET = "Temperature and ET"
+    case yourWater = "Your Water"
 
     var color: Color {
         switch self {
         case .naturalRain:
             return .green
         case .yourWater:
-            return .yellow
+            return .teal
         case .tempAndET:
-            return .pink
+            return .yellow
         }
     }
 }
